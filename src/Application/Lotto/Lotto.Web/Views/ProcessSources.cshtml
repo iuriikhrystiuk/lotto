@@ -1,0 +1,33 @@
+﻿<article class="row vdivide">
+    <article class="col-lg-7">
+        <h4 class="text-center text-uppercase">Select primary prize</h4>
+        <div class="text-center">
+            <button data-bind="click: save" class="btn btn-default">Save</button>
+        </div>
+        <table class="table table-condensed table-hover text-center" data-bind="visible: primaryPrizes().length">
+            <thead>
+                <tr>
+                    <th>Lottery</th>
+                    <th>Id</th>
+                    <th>Size</th>
+                    <th>Connection String</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: primaryPrizes">
+                <tr class="table-striped" data-bind="click: $parent.selectPrimaryPrize, style: { backgroundColor: $parent.selectedPrimaryPrize().size == $data.size ? '#f5f5f5' : '' }">
+                    <td data-bind="text: lotteryName"></td>
+                    <td data-bind="text: id"></td>
+                    <td data-bind="text: size"></td>
+                    <td data-bind="text: connectionString"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <article class="col-lg-5" data-bind="visible: primaryPrizes().length, with: selectedPrimaryPrize">
+        <h4 class="text-center text-uppercase">Lottery <span data-bind="text: lotteryName"></span>; Size <span data-bind="text: size"></span></h4>
+        <div class="input-group">
+            <span class="input-group-addon">Connection String</span>
+            <input class="form-control" data-bind="value: connectionString, valueUpdate: 'input'">
+        </div>
+    </article>
+</article>

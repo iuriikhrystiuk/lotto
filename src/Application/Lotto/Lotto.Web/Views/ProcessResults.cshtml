@@ -1,0 +1,58 @@
+﻿<article class="row vdivide">
+    <article class="col-lg-2">
+        <h4 class="text-uppercase text-center">Select Process Source</h4>
+        <table class="table table-condensed table-hover text-center" data-bind="visible: processSources().length">
+            <thead>
+                <tr>
+                    <th>Lottery</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: processSources">
+                <tr class="table-striped" data-bind="click: $parent.selectProcessSource, style: { backgroundColor: $parent.selectedProcessSource().id == $data.id ? '#f5f5f5' : '' }">
+                    <td data-bind="text: lotteryName"></td>
+                    <td data-bind="text: size"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <article class="col-lg-5" data-bind="visible: processSources().length">
+        <h4 class="text-uppercase text-center">Results from selected process source</h4>
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" data-bind="click: loadResults">Load</button>
+            </div>
+            <input type="text" class="form-control" data-bind="value: repeatsCount">
+        </div>
+        <table class="table table-condensed table-hover text-center" data-bind="visible: processResults().length">
+            <thead>
+                <tr data-bind="foreach: columns">
+                    <th data-bind="text: displayName"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: processResults">
+                <tr class="table-striped" data-bind="foreach: $parent.columns">
+                    <td data-bind="text: $parent[name]"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <article class="col-lg-5" data-bind="visible: processSources().length">
+        <h4 class="text-uppercase text-center">Simple Weight Results</h4>
+        <div class="text-center">
+            <button data-bind="click: calculateSimpleWeights" class="btn btn-default">Calculate</button>
+        </div>
+        <table class="table table-condensed table-hover text-center" data-bind="visible: weights().length">
+            <thead>
+                <tr data-bind="foreach: weightColumns">
+                    <th data-bind="text: displayName"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: weights">
+                <tr class="table-striped" data-bind="foreach: $parent.weightColumns">
+                    <td data-bind="text: $parent[name]"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+</article>

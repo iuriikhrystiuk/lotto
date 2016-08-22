@@ -1,0 +1,36 @@
+﻿<article class="row vdivide">
+    <article class="col-lg-5">
+        <div class="text-center text-uppercase">
+            <h3>Lotteries</h3>
+        </div>
+        <div class="text-center">
+            <button data-bind="click: add" class="btn btn-default">Add</button>
+            <button data-bind="click: save" class="btn btn-default">Save</button>
+        </div>
+        <table data-bind="visible: lotteries().length > 0" class="table table-condensed table-hover text-center">
+            <thead>
+                <tr>
+                    <th>Remove</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: lotteries">
+                <tr class="table-striped" data-bind="click: $parent.select, style: { backgroundColor: $parent.selectedLottery().name == $data.name ? '#f5f5f5' : '' }">
+                    <td class="col-lg-2"><span class="glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span></td>
+                    <td class="col-lg-2" data-bind="text: id"></td>
+                    <td data-bind="text: name"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <article class="col-lg-5" data-bind="visible: lotteries().length > 0, with: selectedLottery">
+        <div class="text-center text-uppercase">
+            <h3>Edit: <span data-bind="text: name"></span></h3>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Name</span>
+            <input type="text" class="form-control" placeholder="Lottery Name" data-bind="value: name, valueUpdate: 'input'">
+        </div>
+    </article>
+</article>

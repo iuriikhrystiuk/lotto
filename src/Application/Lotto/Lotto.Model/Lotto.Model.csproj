@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{272058E8-3D7A-4B03-B3A6-3412F6B5B9EB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lotto.Model</RootNamespace>
+    <AssemblyName>Lotto.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IK.DataAccess">
+      <HintPath>..\Libs\IK.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="IK.Infrastructure">
+      <HintPath>..\Libs\IK.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\Process\CombinationRecordAnnotation.cs" />
+    <Compile Include="Constants\SchemaNames.cs" />
+    <Compile Include="Constants\SourceType.cs" />
+    <Compile Include="Constants\Status.cs" />
+    <Compile Include="DataAccessInitializer.cs" />
+    <Compile Include="Entities\Hub\Lottery.cs" />
+    <Compile Include="Entities\Hub\LotteryPrizeMap.cs" />
+    <Compile Include="Entities\Hub\LotteryProcessResult.cs" />
+    <Compile Include="Entities\Hub\LotteryProcessSource.cs" />
+    <Compile Include="Entities\Hub\LotteryProcessStatus.cs" />
+    <Compile Include="Entities\Hub\LotteryProcessStep.cs" />
+    <Compile Include="Entities\Hub\LotterySource.cs" />
+    <Compile Include="Entities\Hub\LotterySourceColumnConfig.cs" />
+    <Compile Include="Entities\Hub\LotterySourceColumnType.cs" />
+    <Compile Include="Entities\Hub\LotterySourceConfig.cs" />
+    <Compile Include="Entities\Process\Combination.cs" />
+    <Compile Include="Entities\Process\LotteryDrawing.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Implementation\Hub\HubContext.cs" />
+    <Compile Include="Implementation\Hub\HubContextDescriptor.cs" />
+    <Compile Include="Implementation\Hub\HubContextFactory.cs" />
+    <Compile Include="Implementation\Process\ProcessContext.cs" />
+    <Compile Include="Implementation\Process\ProcessContextDescriptor.cs" />
+    <Compile Include="Implementation\Process\ProcessContextFactory.cs" />
+    <Compile Include="Mappings\Hub\LotteryPrizeMapRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotteryProcessResultRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotteryProcessSourceRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotteryProcessStatusRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotteryProcessStepRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotteryRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotterySourceColumnConfigRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotterySourceColumnRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotterySourceColumnTypeRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotterySourceConfigRecordMapping.cs" />
+    <Compile Include="Mappings\Hub\LotterySourceRecordMapping.cs" />
+    <Compile Include="Mappings\Process\CombinationRecordMapping.cs" />
+    <Compile Include="Mappings\Process\StagingCombinationRecordMapping.cs" />
+    <Compile Include="Mappings\Process\LotteryDrawingRecordMapping.cs" />
+    <Compile Include="Migrations\Hub\201505281359503_Initial.cs" />
+    <Compile Include="Migrations\Hub\201505281359503_Initial.Designer.cs">
+      <DependentUpon>201505281359503_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Hub\201506251345159_AddProcessStatusTables.cs" />
+    <Compile Include="Migrations\Hub\201506251345159_AddProcessStatusTables.Designer.cs">
+      <DependentUpon>201506251345159_AddProcessStatusTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Hub\201604071318539_AddLotterySourceConfigs.cs" />
+    <Compile Include="Migrations\Hub\201604071318539_AddLotterySourceConfigs.Designer.cs">
+      <DependentUpon>201604071318539_AddLotterySourceConfigs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Hub\Configuration.cs" />
+    <Compile Include="Migrations\Process\201505071525156_Initial.cs" />
+    <Compile Include="Migrations\Process\201505071525156_Initial.designer.cs">
+      <DependentUpon>201505071525156_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Process\201505141331526_RenameSchemaChangeLotteryDrawings.cs" />
+    <Compile Include="Migrations\Process\201505141331526_RenameSchemaChangeLotteryDrawings.Designer.cs">
+      <DependentUpon>201505141331526_RenameSchemaChangeLotteryDrawings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Process\201505151525003_AddIndexForRepeatsCount.cs" />
+    <Compile Include="Migrations\Process\201505151525003_AddIndexForRepeatsCount.Designer.cs">
+      <DependentUpon>201505151525003_AddIndexForRepeatsCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Process\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Records\Hub\LotterySourceColumnTypeRecord.cs" />
+    <Compile Include="Records\Hub\LotteryPrizeMapRecord.cs" />
+    <Compile Include="Records\Hub\LotteryProcessResultRecord.cs" />
+    <Compile Include="Records\Hub\LotteryProcessSourceRecord.cs" />
+    <Compile Include="Records\Hub\LotteryProcessStatusRecord.cs" />
+    <Compile Include="Records\Hub\LotteryProcessStepRecord.cs" />
+    <Compile Include="Records\Hub\LotteryRecord.cs" />
+    <Compile Include="Records\Hub\LotterySourceColumnConfigRecord.cs" />
+    <Compile Include="Records\Hub\LotterySourceColumnRecord.cs" />
+    <Compile Include="Records\Hub\LotterySourceRecord.cs" />
+    <Compile Include="Records\Hub\LotterySourceConfigRecord.cs" />
+    <Compile Include="Records\Process\CombinationRecord.cs" />
+    <Compile Include="Records\Process\StagingCombinationRecord.cs" />
+    <Compile Include="Records\Process\LotteryDrawingRecord.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\Hub\201505281359503_Initial.resx">
+      <DependentUpon>201505281359503_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Hub\201506251345159_AddProcessStatusTables.resx">
+      <DependentUpon>201506251345159_AddProcessStatusTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Hub\201604071318539_AddLotterySourceConfigs.resx">
+      <DependentUpon>201604071318539_AddLotterySourceConfigs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Process\201505071525156_Initial.resx">
+      <DependentUpon>201505071525156_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Process\201505141331526_RenameSchemaChangeLotteryDrawings.resx">
+      <DependentUpon>201505141331526_RenameSchemaChangeLotteryDrawings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\Process\201505151525003_AddIndexForRepeatsCount.resx">
+      <DependentUpon>201505151525003_AddIndexForRepeatsCount.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

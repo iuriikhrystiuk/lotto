@@ -1,0 +1,67 @@
+﻿<article class="row vdivide">
+    <article class="col-lg-6">
+        <h4 class="text-center text-uppercase">Select process status</h4>
+        <table class="table table-condensed table-hover text-center" data-bind="visible: processStatuses().length">
+            <thead>
+                <tr>
+                    <th>Lottery</th>
+                    <th>Id</th>
+                    <th>Size</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: processStatuses">
+                <tr class="table-striped" data-bind="click: $parent.selectProcessStatus, style: { backgroundColor: $parent.selectedProcessStatus().id == $data.id ? '#f5f5f5' : '' }">
+                    <td data-bind="text: lotteryName"></td>
+                    <td data-bind="text: id"></td>
+                    <td data-bind="text: size"></td>
+                    <td data-bind="text: status"></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <article class="col-lg-6" data-bind="with: selectedProcessStatus">
+        <h4 class="text-center text-uppercase">Status: <span data-bind="text: status"></span></h4>
+        <div class="text-center">
+            <button class="btn btn-default" data-bind="click: $parent.queueProcess">Queue</button>
+            <button class="btn btn-default" data-bind="click: $parent.stopProcess">Stop</button>
+            <button class="btn btn-default" data-bind="click: $parent.continueProcess">Continue</button>
+            <button class="btn btn-default" data-bind="click: $parent.cancelProcess">Cancel</button>
+        </div>
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">Lottery Name</span>
+            <span class="form-control" data-bind="text: lotteryName"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Size</span>
+            <span class="form-control" data-bind="text: size"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Total Steps</span>
+            <span class="form-control" data-bind="text: totalSteps"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Current Step</span>
+            <span class="form-control" data-bind="text: currentStep"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Average Duration</span>
+            <span class="form-control" data-bind="text: averageDuration"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Max Duration</span>
+            <span class="form-control" data-bind="text: maxDuration"> </span>
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon">Estimated Time</span>
+            <span class="form-control" data-bind="text: estimatedTime"> </span>
+        </div>
+    </article>
+</article>

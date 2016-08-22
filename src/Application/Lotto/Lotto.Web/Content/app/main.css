@@ -1,0 +1,17 @@
+﻿@media only screen and (min-width: 1200px) {
+    .vdivide article[class*='col-']:not(:first-child):before {
+        background: #e0e0e0;
+        width: 1px;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        min-height: 70px;
+    }
+}
+
+table.text-center th {
+    text-align: center;
+}

@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.DataAccess", "IK.DataAccess\IK.DataAccess.csproj", "{FA5A2774-FC28-4F74-8404-0E0394CBB348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C4ED6E80-33FA-4882-91B1-EEECC4505D81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.DataAccess.Tests", "IK.DataAccess.Tests\IK.DataAccess.Tests.csproj", "{3CF2A06F-3F17-4687-94C7-B09178CDF8F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Infrastructure", "IK.Infrastructure\IK.Infrastructure.csproj", "{98EA114C-9E3F-4E00-BF3B-0DDD537FB63B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E321203A-E7E3-41CE-8A76-088B56BA0317}"
+	ProjectSection(SolutionItems) = preProject
+		IK.sln.DotSettings = IK.sln.DotSettings
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Logging", "IK.Common\IK.Logging.csproj", "{88D39B3B-F093-4322-BB5A-65F36A48F311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Algorithms", "IK.Algorithms\IK.Algorithms.csproj", "{07C7F58E-1189-4148-ACE3-F4F8EAAECF26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Web.Infrastructure", "IK.Web.Infrastructure\IK.Web.Infrastructure.csproj", "{36F6F500-C68A-49DD-BEB3-081D13DCBE36}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://iuriikhrystiuk.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IK.DataAccess\\IK.DataAccess.csproj
+		SccProjectName1 = IK.DataAccess
+		SccLocalPath1 = IK.DataAccess
+		SccProjectUniqueName2 = IK.DataAccess.Tests\\IK.DataAccess.Tests.csproj
+		SccProjectTopLevelParentUniqueName2 = IK.sln
+		SccProjectName2 = IK.DataAccess.Tests
+		SccLocalPath2 = IK.DataAccess.Tests
+		SccProjectUniqueName3 = IK.Infrastructure\\IK.Infrastructure.csproj
+		SccProjectName3 = IK.Infrastructure
+		SccLocalPath3 = IK.Infrastructure
+		SccProjectUniqueName4 = IK.Common\\IK.Logging.csproj
+		SccProjectName4 = IK.Common
+		SccLocalPath4 = IK.Common
+		SccProjectUniqueName5 = IK.Algorithms\\IK.Algorithms.csproj
+		SccProjectName5 = IK.Algorithms
+		SccLocalPath5 = IK.Algorithms
+		SccProjectUniqueName6 = IK.Web.Infrastructure\\IK.Web.Infrastructure.csproj
+		SccProjectName6 = IK.Web.Infrastructure
+		SccLocalPath6 = IK.Web.Infrastructure
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA5A2774-FC28-4F74-8404-0E0394CBB348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA5A2774-FC28-4F74-8404-0E0394CBB348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA5A2774-FC28-4F74-8404-0E0394CBB348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA5A2774-FC28-4F74-8404-0E0394CBB348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EA114C-9E3F-4E00-BF3B-0DDD537FB63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EA114C-9E3F-4E00-BF3B-0DDD537FB63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EA114C-9E3F-4E00-BF3B-0DDD537FB63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EA114C-9E3F-4E00-BF3B-0DDD537FB63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D39B3B-F093-4322-BB5A-65F36A48F311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D39B3B-F093-4322-BB5A-65F36A48F311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D39B3B-F093-4322-BB5A-65F36A48F311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D39B3B-F093-4322-BB5A-65F36A48F311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C7F58E-1189-4148-ACE3-F4F8EAAECF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C7F58E-1189-4148-ACE3-F4F8EAAECF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C7F58E-1189-4148-ACE3-F4F8EAAECF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C7F58E-1189-4148-ACE3-F4F8EAAECF26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3} = {C4ED6E80-33FA-4882-91B1-EEECC4505D81}
+	EndGlobalSection
+EndGlobal

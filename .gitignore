@@ -1,2 +1,9 @@
-**/bin
-**/obj
+bin/
+obj/
+.vs/
+StyleCop.Cache
+*.vspscc
+*.user
+*.suo
+*.vssscc
+packages/
