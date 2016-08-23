@@ -10,10 +10,6 @@ namespace Lotto.Processor.Interfaces
 {
     public interface ILottoFacade
     {
-        void Run(int size, IPauseToken pauseToken, CancellationToken cancellationToken);
-
-        Task RunAsync(int lotteryId, IPauseToken pauseToken, CancellationToken cancellationToken);
-
         Task StartProcessing(LotteryProcessStatus status, IPauseToken pauseToken, CancellationToken cancellationToken);
     }
 }

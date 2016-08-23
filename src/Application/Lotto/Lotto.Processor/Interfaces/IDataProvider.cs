@@ -6,6 +6,6 @@ namespace Lotto.Processor.Interfaces
 {
     internal interface IDataProvider
     {
-        List<LotteryDrawing> Provide(string fileName, LotterySourceConfig config, List<LotterySourceColumnConfig> columns);
+        List<LotteryDrawing> Provide(int lotteryId);
     }
 }

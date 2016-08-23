@@ -2,6 +2,6 @@
 {
     internal interface IDownloader
     {
-        string Download(string url, string fileNamePattern);
+        string Download(string url);
     }
 }

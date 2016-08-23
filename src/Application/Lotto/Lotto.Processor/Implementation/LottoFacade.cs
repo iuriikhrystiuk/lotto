@@ -35,9 +35,6 @@ namespace Lotto.Processor.Implementation
         private readonly ILotteryProcessStatusManager statusManager;
         private readonly ILotteryProcessStepsManager stepsManager;
         private readonly IUnitOfWorkFactory unitOfWorkFacory;
-        private readonly ILotterySourceManager lotterySourceManager;
-        private readonly ILotterySourceConfigManager lotterySourceConfigManager;
-        private readonly ILotterySourceColumnConfigManager lotterySourceColumnConfigManager;
 
         internal LottoFacade(
             ILogger logger,
@@ -46,10 +43,7 @@ namespace Lotto.Processor.Implementation
             IDataProvider provider,
             IUnitOfWorkFactory unitOfWorkFacory,
             ILotteryProcessStatusManager statusManager,
-            ILotteryProcessStepsManager stepsManager,
-            ILotterySourceManager lotterySourceManager,
-            ILotterySourceConfigManager lotterySourceConfigManager,
-            ILotterySourceColumnConfigManager lotterySourceColumnConfigManager)
+            ILotteryProcessStepsManager stepsManager)
         {
             this.logger = logger;
             this.generator = generator;
@@ -58,38 +52,6 @@ namespace Lotto.Processor.Implementation
             this.unitOfWorkFacory = unitOfWorkFacory;
             this.statusManager = statusManager;
             this.stepsManager = stepsManager;
-            this.lotterySourceManager = lotterySourceManager;
-            this.lotterySourceConfigManager = lotterySourceConfigManager;
-            this.lotterySourceColumnConfigManager = lotterySourceColumnConfigManager;
-        }
-
-        public async void Run(int size, IPauseToken pauseToken, CancellationToken cancellationToken)
-        {
-            this.logger.Info("Downloading the file with lottery drawings.");
-            string file = this.downloader.Download("http://lottery.com.ua/mailbox/out/downloading_results/keno_csv.zip", "keno_results.csv");
-
-            this.logger.Info("Extracting lottery drawings from {0}.", file);
-            List<LotteryDrawing> drawings = this.provider.Provide(file, null, null);
-            int counter = 0;
-
-            this.logger.Info("Extracted {0} lottery drawings from {1}.", drawings.Count, file);
-            foreach (LotteryDrawing lotteryDrawing in drawings)
-            {
-                counter++;
-                try
-                {
-                    await this.processDrawing(lotteryDrawing, size, counter, "Data Source=(local);Initial Catalog=Lotto;Integrated Security=true;MultipleActiveResultSets=True;Connection Timeout=0", pauseToken, cancellationToken);
-                }
-                catch (OperationCanceledException)
-                {
-                    return;
-                }
-            }
-        }
-
-        public Task RunAsync(int size, IPauseToken pauseToken, CancellationToken cancellationToken)
-        {
-            return Task.Factory.StartNew(() => this.Run(size, pauseToken, cancellationToken), cancellationToken);
         }
 
         public Task StartProcessing(LotteryProcessStatus status, IPauseToken pauseToken, CancellationToken cancellationToken)
@@ -98,21 +60,8 @@ namespace Lotto.Processor.Implementation
             {
                 this.statusManager.SetStatus(status.PrimaryLotteryPrizeId, Status.Started);
 
-                this.logger.Info("Determining lottery source for lottery {0}.", status.PrimaryLotteryPrize.LotteryId);
-                var source = lotterySourceManager.GetSourceForLottery(status.PrimaryLotteryPrize.LotteryId);
-
-                this.logger.Info("Determining lottery source configuration for source {0}.", source.Id);
-                //TODO: fix for multiple files
-                var sourceConfig = this.lotterySourceConfigManager.GetConfigsForSource(source.Id).First();
-
-                this.logger.Info("Determining lottery source columns configuration for source configuration {0}.", sourceConfig.Id);
-                var sourceColumsConfigs = this.lotterySourceColumnConfigManager.GetColumnsForConfig(sourceConfig.Id);
-
-                this.logger.Info("Downloading the file with lottery drawings.");
-                string file = this.downloader.Download(source.DownloadUrl, sourceConfig.FileNamePattern);
-
-                this.logger.Info("Extracting lottery drawings from {0}.", file);
-                List<LotteryDrawing> drawings = this.provider.Provide(file, sourceConfig, sourceColumsConfigs);
+                
+                List<LotteryDrawing> drawings = this.provider.Provide(status.PrimaryLotteryPrize.LotteryId);
                 int counter = 0;
 
                 this.logger.Info("Deleting previous steps for status: {0}.", status.Id);
@@ -131,7 +80,7 @@ namespace Lotto.Processor.Implementation
                 }).ToList();
                 steps = this.stepsManager.AddRange(steps).ToList();
 
-                this.logger.Info("Extracted {0} lottery drawings from {1}.", drawings.Count, file);
+                this.logger.Info("Extracted {0} lottery drawings.", drawings.Count);
                 counter = -1;
                 foreach (LotteryDrawing lotteryDrawing in drawings)
                 {

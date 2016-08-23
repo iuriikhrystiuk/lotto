@@ -3,26 +3,19 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using Lotto.Common.Tools;
 using Lotto.Processor.Interfaces;
 
 namespace Lotto.Processor.Implementation
 {
     internal class WebDownloader : IDownloader
     {
-        public string Download(string url, string fileNamePattern)
+        public string Download(string url)
         {
             WebClient client = new WebClient();
-            var fileName = Guid.NewGuid().ToString();
-            client.DownloadFile(url, fileName + ".zip");
-            string directory = Directory.GetCurrentDirectory();
-            List<string> files = ZipTools.Unzip(fileName + ".zip", directory);
-            string file = files.FirstOrDefault(f => f.Contains(fileNamePattern));
-            return file;
+            var fileName = Guid.NewGuid() + ".zip";
+            client.DownloadFile(url, fileName);
+            return fileName;
         }
     }
 }
