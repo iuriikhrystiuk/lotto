@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using IK.Algorithms.Matrices.Constants;
 using IK.Algorithms.Matrices.Exceptions;
 using IK.Algorithms.Matrices.Interfaces;
@@ -72,6 +73,27 @@ namespace IK.Algorithms.Matrices.Implementations
             return this.matrix[row][column];
         }
 
+        public TValue[] Get(TIdentifier identifier, Dimensions dimension)
+        {
+            this.EnsureInitialized();
+            switch (dimension)
+            {
+                case Dimensions.Column:
+                    int columnIndex = this.GetIndex(Dimensions.Column, identifier);
+                    var column = new TValue[this.rowIdentifiers.Length];
+                    for (int i = 0; i < this.rowIdentifiers.Length; i++)
+                    {
+                        column[i] = this.matrix[i][columnIndex];
+                    }
+                    return column;
+                case Dimensions.Row:
+                    int row = this.GetIndex(Dimensions.Row, identifier);
+                    return this.matrix[row];
+                default:
+                    return null;
+            }
+        }
+
         public void AddRows(params TIdentifier[] rows)
         {
             if (rows == null)
@@ -102,6 +124,50 @@ namespace IK.Algorithms.Matrices.Implementations
             {
                 throw new NotInitializedException("Cannot add columns before adding rows. Add rows first.");
             }
+        }
+
+        /// <summary>
+        /// Transponses this instance.
+        /// </summary>
+        public void Transponse()
+        {
+            var newMatrix = new Matrix<TIdentifier, TValue>();
+            newMatrix.AddRows(this.columnIdentifiers);
+            newMatrix.AddColumns(this.rowIdentifiers);
+            for (int i = 0; i < this.rowIdentifiers.Length; i++)
+            {
+                var row = this.Get(this.rowIdentifiers[i], Dimensions.Row);
+                newMatrix.Set(this.rowIdentifiers[i], Dimensions.Column, row);
+            }
+            this.rowIdentifiers = newMatrix.rowIdentifiers;
+            this.columnIdentifiers = newMatrix.columnIdentifiers;
+            this.matrix = newMatrix.matrix;
+        }
+
+        public IMatrix<TIdentifier, TValue> MultiplyBy(IMatrix<TIdentifier, TValue> operand, Func<TValue, TValue, TValue> multiplication, Func<TValue, TValue, TValue> sum)
+        {
+            if (this.columnIdentifiers.Length != operand.Rows.Count())
+            {
+                throw new Exception("Can not multiply specified matrices. Dimensions are not valid");
+            }
+
+            var result = new Matrix<TIdentifier, TValue>();
+            result.AddRows(this.rowIdentifiers);
+            result.AddColumns(operand.Columns.ToArray());
+
+            for (int i = 0; i < this.rowIdentifiers.Length; i++)
+            {
+                var currentRow = this.matrix[i];
+                for (int j = 0; j < operand.Columns.Count(); j++)
+                {
+                    var targetColumn = operand.Get(operand.Columns.ElementAt(i), Dimensions.Column);
+                    var resultingElement = currentRow.Zip(targetColumn, multiplication).Aggregate(default(TValue), sum);
+                    result.Set(this.rowIdentifiers[i], operand.Columns.ElementAt(j), resultingElement);
+                }
+
+            }
+
+            return result;
         }
 
         private int GetIndex(Dimensions dimension, TIdentifier identifier)

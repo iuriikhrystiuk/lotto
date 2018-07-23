@@ -15,9 +15,7 @@ using Lotto.Logic.Interfaces;
 using Lotto.Model.Constants;
 using Lotto.Model.Entities.Hub;
 using Lotto.Model.Entities.Process;
-using Lotto.Model.Implementation.Hub;
 using Lotto.Model.Implementation.Process;
-using Lotto.Model.Records.Hub;
 using Lotto.Model.Records.Process;
 using Lotto.Processor.Interfaces;
 
@@ -28,28 +26,25 @@ namespace Lotto.Processor.Implementation
     /// </summary>
     public class LottoFacade : ILottoFacade
     {
-        private readonly IDownloader downloader;
         private readonly IDataGenerator generator;
         private readonly ILogger logger;
         private readonly IDataProvider provider;
         private readonly ILotteryProcessStatusManager statusManager;
         private readonly ILotteryProcessStepsManager stepsManager;
-        private readonly IUnitOfWorkFactory unitOfWorkFacory;
+        private readonly IUnitOfWorkFactory unitOfWorkFactory;
 
         internal LottoFacade(
             ILogger logger,
             IDataGenerator generator,
-            IDownloader downloader,
             IDataProvider provider,
-            IUnitOfWorkFactory unitOfWorkFacory,
+            IUnitOfWorkFactory unitOfWorkFactory,
             ILotteryProcessStatusManager statusManager,
             ILotteryProcessStepsManager stepsManager)
         {
             this.logger = logger;
             this.generator = generator;
-            this.downloader = downloader;
             this.provider = provider;
-            this.unitOfWorkFacory = unitOfWorkFacory;
+            this.unitOfWorkFactory = unitOfWorkFactory;
             this.statusManager = statusManager;
             this.stepsManager = stepsManager;
         }
@@ -60,7 +55,6 @@ namespace Lotto.Processor.Implementation
             {
                 this.statusManager.SetStatus(status.PrimaryLotteryPrizeId, Status.Started);
 
-                
                 List<LotteryDrawing> drawings = this.provider.Provide(status.PrimaryLotteryPrize.LotteryId);
                 int counter = 0;
 
@@ -91,7 +85,7 @@ namespace Lotto.Processor.Implementation
                         step.StartDate = DateTime.Now;
                         step.Status = Status.Started;
                         this.stepsManager.Update(step);
-                        var duration = await this.processDrawing(lotteryDrawing, status.PrimaryLotteryPrize.Size, counter, status.PrimaryLotteryPrize.ProcessSource.ConnectionString, pauseToken,
+                        var duration = await this.ProcessDrawing(lotteryDrawing, status.PrimaryLotteryPrize.Size, counter, status.PrimaryLotteryPrize.ProcessSource.ConnectionString, pauseToken,
                                         cancellationToken);
                         step.EndDate = DateTime.Now;
                         step.Duration = TimeSpan.FromSeconds(duration);
@@ -108,12 +102,12 @@ namespace Lotto.Processor.Implementation
             }, cancellationToken);
         }
 
-        private async Task<double> processDrawing(LotteryDrawing lotteryDrawing, int size, int counter, string connectionString, IPauseToken pauseToken, CancellationToken cancellationToken)
+        private async Task<double> ProcessDrawing(LotteryDrawing lotteryDrawing, int size, int counter, string connectionString, IPauseToken pauseToken, CancellationToken cancellationToken)
         {
             Stopwatch st = new Stopwatch();
             st.Start();
             this.logger.Info("Processing lottery drawing #{0}", counter);
-            using (IUnitOfWork uow = this.unitOfWorkFacory.CreateUnitOfWork(new ProcessContextDescriptor(), connectionString))
+            using (IUnitOfWork uow = this.unitOfWorkFactory.CreateUnitOfWork(new ProcessContextDescriptor(), connectionString))
             {
                 try
                 {
@@ -137,7 +131,7 @@ namespace Lotto.Processor.Implementation
                             await uow.SaveChangesAsync();
                         }
 
-                        this.logger.Info("Found lottery drowing #{0} and status {1}", counter,
+                        this.logger.Info("Found lottery drawing #{0} and status {1}", counter,
                             existingDrawing.Status);
                         if (existingDrawing.Status == Status.Started)
                         {
@@ -179,12 +173,12 @@ namespace Lotto.Processor.Implementation
                 }
                 catch (OperationCanceledException)
                 {
-                    // munch it and exit
                     this.logger.Info("The processing of combinations of size {0} was cancelled.", size);
                     throw;
                 }
                 catch (Exception ex)
                 {
+                    // munch it and exit
                     this.logger.Error(ex, "Error occurred while processing drawing #{0}. Please rerun the tool to process it.", counter);
                 }
             }

@@ -60,7 +60,7 @@ namespace Lotto.Processor.Implementation
                 string file = files.FirstOrDefault(f => f.Contains(lotterySourceConfig.FileNamePattern));
 
                 this.logger.Info("Determining lottery source columns configuration for source configuration {0}.", lotterySourceConfig.Id);
-                var sourceColumsConfigs = this.lotterySourceColumnConfigManager.GetColumnsForConfig(lotterySourceConfig.Id);
+                var sourceColumnsConfigs = this.lotterySourceColumnConfigManager.GetColumnsForConfig(lotterySourceConfig.Id);
 
                 this.logger.Info("Extracting lottery drawings from {0}.", file);
                 DelimitedClassBuilder cb = new DelimitedClassBuilder("Combination_" + lotterySourceConfig.Id, lotterySourceConfig.FieldDelimiter)
@@ -70,7 +70,7 @@ namespace Lotto.Processor.Implementation
                     IgnoreLastLines = lotterySourceConfig.FootersCount
                 };
 
-                foreach (var column in sourceColumsConfigs)
+                foreach (var column in sourceColumnsConfigs)
                 {
                     cb.AddField(column.GetColumnName(), Type.GetType(column.DotNetTypeName));
                 }
@@ -79,11 +79,10 @@ namespace Lotto.Processor.Implementation
                 FileHelperEngine engine = new FileHelperEngine(dynamicallyCreatedRecordClass);
                 DataTable parsedColumns = engine.ReadFileAsDT(file);
 
-
                 foreach (DataRow dataRow in parsedColumns.Rows)
                 {
                     var drawing = new LotteryDrawing { Combination = new List<int>() };
-                    foreach (var column in sourceColumsConfigs.Where(c => c.BelongsToCombination))
+                    foreach (var column in sourceColumnsConfigs.Where(c => c.BelongsToCombination))
                     {
                         drawing.Combination.Add(dataRow.Field<int>(column.GetColumnName()));
                     }

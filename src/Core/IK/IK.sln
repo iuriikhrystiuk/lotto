@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.DataAccess", "IK.DataAccess\IK.DataAccess.csproj", "{FA5A2774-FC28-4F74-8404-0E0394CBB348}"
 EndProject
@@ -23,32 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Algorithms", "IK.Algorit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Web.Infrastructure", "IK.Web.Infrastructure\IK.Web.Infrastructure.csproj", "{36F6F500-C68A-49DD-BEB3-081D13DCBE36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IK.Algorithms.Tests", "IK.Algorithms.Tests\IK.Algorithms.Tests.csproj", "{588E56C4-2604-4335-AE36-8F55C92951FC}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://iuriikhrystiuk.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = IK.DataAccess\\IK.DataAccess.csproj
-		SccProjectName1 = IK.DataAccess
-		SccLocalPath1 = IK.DataAccess
-		SccProjectUniqueName2 = IK.DataAccess.Tests\\IK.DataAccess.Tests.csproj
-		SccProjectTopLevelParentUniqueName2 = IK.sln
-		SccProjectName2 = IK.DataAccess.Tests
-		SccLocalPath2 = IK.DataAccess.Tests
-		SccProjectUniqueName3 = IK.Infrastructure\\IK.Infrastructure.csproj
-		SccProjectName3 = IK.Infrastructure
-		SccLocalPath3 = IK.Infrastructure
-		SccProjectUniqueName4 = IK.Common\\IK.Logging.csproj
-		SccProjectName4 = IK.Common
-		SccLocalPath4 = IK.Common
-		SccProjectUniqueName5 = IK.Algorithms\\IK.Algorithms.csproj
-		SccProjectName5 = IK.Algorithms
-		SccLocalPath5 = IK.Algorithms
-		SccProjectUniqueName6 = IK.Web.Infrastructure\\IK.Web.Infrastructure.csproj
-		SccProjectName6 = IK.Web.Infrastructure
-		SccLocalPath6 = IK.Web.Infrastructure
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -78,11 +55,16 @@ Global
 		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36F6F500-C68A-49DD-BEB3-081D13DCBE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{588E56C4-2604-4335-AE36-8F55C92951FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588E56C4-2604-4335-AE36-8F55C92951FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588E56C4-2604-4335-AE36-8F55C92951FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588E56C4-2604-4335-AE36-8F55C92951FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3CF2A06F-3F17-4687-94C7-B09178CDF8F3} = {C4ED6E80-33FA-4882-91B1-EEECC4505D81}
+		{588E56C4-2604-4335-AE36-8F55C92951FC} = {C4ED6E80-33FA-4882-91B1-EEECC4505D81}
 	EndGlobalSection
 EndGlobal

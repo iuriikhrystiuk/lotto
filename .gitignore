@@ -7,3 +7,4 @@ StyleCop.Cache
 *.suo
 *.vssscc
 packages/
+.idea
